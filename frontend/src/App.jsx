@@ -7,7 +7,7 @@ export default function App() {
   const [status, setStatus] = useState("Checking...");
   const [resp, setResp] = useState(null);
   const [file, setFile] = useState(null);
-
+//test
   useEffect(() => {
     axios.get(`${API}/health/`)
       .then(r => setStatus(r.data.status))
@@ -40,3 +40,4 @@ export default function App() {
     </div>
   );
 }
+
