@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-const API = "http://127.0.0.1:8000";
+import { axiosInstance } from "./services/axios-instance";
 
 export default function App() {
   const [status, setStatus] = useState("Checking...");
@@ -9,7 +7,7 @@ export default function App() {
   const [file, setFile] = useState(null);
 //test
   useEffect(() => {
-    axios.get(`${API}/health/`)
+    axiosInstance.get('/health/')
       .then(r => setStatus(r.data.status))
       .catch(() => setStatus("Failed"));
   }, []);
@@ -18,7 +16,7 @@ export default function App() {
     if (!file) return;
     const form = new FormData();
     form.append("file", file);
-    const { data } = await axios.post(`${API}/api/predict`, form, {
+    const { data } = await axiosInstance.post(`/api/predict`, form, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     setResp(data);
